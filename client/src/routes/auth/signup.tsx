@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import "./styles.css";
+import "../styles.css";
 import {useNavigate} from 'react-router-dom';
 import {AuthService, ErrorCode} from '@genezio/auth';
 
@@ -40,7 +40,7 @@ const Signup: React.FC = () => {
 
   return (
     <div className="center">
-      <form onSubmit={handleSubmit} className="signup-form">
+      <form onSubmit={handleSubmit} className="auth-form">
         <div>
           <label htmlFor="name">Name:</label>
           <input

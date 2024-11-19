@@ -6,12 +6,12 @@ import {
 import ListView from './routes/links.tsx';
 import Redirect from './routes/redirect.tsx';
 import Analytics from './routes/analytics.tsx';
-import Login from './routes/login';
-import Signup from './routes/signup';
-import ForgetPasswordForm from "./routes/forget.tsx";
+import Login from './routes/auth/login.tsx';
+import Signup from './routes/auth/signup.tsx';
+import ForgetPasswordForm from "./routes/auth/forget.tsx";
 
 import {AuthService} from "@genezio/auth";
-import ResetPasswordForm from "./routes/reset.tsx";
+import ResetPasswordForm from "./routes/auth/reset.tsx";
 
 const authToken = import.meta.env.VITE_AUTH_TOKEN;
 const region = import.meta.env.VITE_AUTH_REGION;
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     element: <ResetPasswordForm/>,
   },
   {
-    path: "/forget-password",
+    path: "/forgot-password",
     element: <ForgetPasswordForm/>
   }
 ]);

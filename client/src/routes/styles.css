@@ -141,7 +141,7 @@ h1 {
     margin-right: 10px;
 }
 
-.login-form, .signup-form {
+.auth-form {
     background-color: white;
     padding: 30px;
     border-radius: 8px;
@@ -149,21 +149,19 @@ h1 {
     width: 300px;
 }
 
-.login-form div, .signup-form div {
+.auth-form div{
     margin-bottom: 20px;
 }
 
-.login-form label, .signup-form label {
+.auth-form label {
     font-size: 1em;
     display: block;
     margin-bottom: 5px;
 }
 
-.login-form input[type="email"],
-.login-form input[type="password"],
-.signup-form input[type="email"],
-.signup-form input[type="password"],
-.signup-form input[type="text"] {
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -189,17 +187,16 @@ h1 {
 
 .actions button {
     padding: 10px;
-    background-color: #007bff;
     border: none;
     color: white;
     cursor: pointer;
     border-radius: 4px;
     font-size: 1em;
+    background-color: #6c757d;
 }
 
-.actions button:last-child {
-    background-color: #6c757d;
-    margin-left: 10px;
+.actions button[type="submit"] {
+    background-color: #007bff;
 }
 
 .actions button:hover {
