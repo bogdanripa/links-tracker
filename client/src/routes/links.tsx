@@ -169,8 +169,8 @@ const List: React.FC = () => {
               placeholder="https://www.example.com"
           />
           <div className="modal-actions">
-              <button className="create-button" onClick={createNewItem}>Create</button>
               <button className="cancel-button" onClick={closeNewLinkModal}>Cancel</button>
+              <button className="create-button" onClick={createNewItem}>Create</button>
           </div>
       </Modal>
       <Modal
@@ -188,8 +188,8 @@ const List: React.FC = () => {
               placeholder="John, Jane"
           />
           <div className="modal-actions">
-              <button className="create-button" onClick={sendLink}>Create</button>
               <button className="cancel-button" onClick={closeSendLinkModal}>Cancel</button>
+              <button className="create-button" onClick={sendLink}>Create</button>
           </div>
       </Modal>
       {loading && (

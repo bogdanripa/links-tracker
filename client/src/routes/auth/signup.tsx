@@ -66,8 +66,8 @@ const Signup: React.FC = () => {
             onChange={e => setPassword(e.target.value)}/>
         </div>
         <div className="actions">
-          <button type="submit">{loading ? "Loading..." : "Sign Up"}</button>
           <button onClick={() => navigate('/login')}>Go to login</button>
+          <button type="submit">{loading ? "Loading..." : "Sign Up"}</button>
         </div>
       </form>
     </div>

@@ -56,10 +56,10 @@ const Login: React.FC = () => {
           <label>
             <a href="/forgot-password">Forgot password?</a>
           </label>
+          <button onClick={() => navigate('/signup')}>Create</button>
           <button type="submit">
             {loginLoading ? "Loading..." : "Login"}
           </button>
-          <button onClick={() => navigate('/signup')}>Create</button>
         </div>
       </form>
     </div>
