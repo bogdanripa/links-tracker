@@ -1,18 +1,237 @@
-.form-container {
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #0073e6;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.app-name {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    margin-right: 15px;
+}
+
+.logout-button {
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.main-content {
+    flex-direction: column;
+    padding: 80px 20px 20px; /* Adjust padding to accommodate the fixed header */
+}
+
+.table-actions {
+    margin-bottom: 10px;
+}
+
+.create-button {
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th, .data-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.delete-button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.default-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    z-index: 1000;
 }
-form {
+
+.modal {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.modal input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.modal-actions {
+    margin-top: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: flex-end;
     gap: 10px;
 }
-input {
-    margin: 5px 0;
-}
-button {
+
+.cancel-button {
+    padding: 5px 10px;
+    background-color: #6c757d;
+    border: none;
+    color: white;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+.login-form, .signup-form {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.login-form div, .signup-form div {
+    margin-bottom: 20px;
+}
+
+.login-form label, .signup-form label {
+    font-size: 1em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"],
+.signup-form input[type="email"],
+.signup-form input[type="password"],
+.signup-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.actions a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.actions a:hover {
+    text-decoration: underline;
+}
+
+.actions button {
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.actions button:last-child {
+    background-color: #6c757d;
+    margin-left: 10px;
+}
+
+.actions button:hover {
+    opacity: 0.9;
+}
+
+.center {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    color: white;
+    font-size: 1.5em;
+    visibility: hidden;
+}
+
+.loading-overlay.show {
+    visibility: visible;
 }

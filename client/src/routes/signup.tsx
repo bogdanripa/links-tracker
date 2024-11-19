@@ -39,8 +39,8 @@ const Signup: React.FC = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="center">
+      <form onSubmit={handleSubmit} className="signup-form">
         <div>
           <label htmlFor="name">Name:</label>
           <input
@@ -65,10 +65,12 @@ const Signup: React.FC = () => {
             value={password}
             onChange={e => setPassword(e.target.value)}/>
         </div>
-        <button type="submit">{loading ? "Loading..." : "Sign Up"}</button>
-        <button onClick={() => navigate('/login')}>Go to login</button>
+        <div className="actions">
+          <button type="submit">{loading ? "Loading..." : "Sign Up"}</button>
+          <button onClick={() => navigate('/login')}>Go to login</button>
+        </div>
       </form>
-    </>
+    </div>
   )
     ;
 };

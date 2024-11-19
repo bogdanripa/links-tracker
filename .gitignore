@@ -91,3 +91,5 @@ lerna-debug.log
 Thumbs.db
 
 .idea/
+client/package-lock.json
+server/package-lock.json

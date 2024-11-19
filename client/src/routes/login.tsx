@@ -17,19 +17,23 @@ const Login: React.FC = () => {
       await AuthService.getInstance().login(email, password);
       navigate("/");
     } catch (error: any) {
-      if (error.code === ErrorCode.INCORRECT_EMAIL_OR_PASSWORD) {
-        alert('Incorrect email or password');
-      } else {
-        console.log('Login Failed', error);
-        alert('Login Failed');
-      }
+      switch(error.code) {
+        case ErrorCode.INCORRECT_EMAIL_OR_PASSWORD:
+          alert('Incorrect email or password');
+          break;
+        case ErrorCode.EMAIL_NOT_VERIFIED:
+          alert('Email address not verified. Please check your inbox to verify your email');
+          break;
+        default:
+          alert('Login Failed');
+        }
     }
     setLoginLoading(false);
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="center">
+      <form onSubmit={handleSubmit} className="login-form">
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -48,15 +52,17 @@ const Login: React.FC = () => {
             onChange={e => setPassword(e.target.value)}
           />
         </div>
-        <label>
-          <a href="/forgot-password" style={{color:"white"}}>Forgot password?</a>
-        </label>
-        <button type="submit">
-          {loginLoading ? "Loading..." : "Login"}
-        </button>
-        <button onClick={() => navigate('/signup')}>Create an account</button>
+        <div className="actions">
+          <label>
+            <a href="/forgot-password">Forgot password?</a>
+          </label>
+          <button type="submit">
+            {loginLoading ? "Loading..." : "Login"}
+          </button>
+          <button onClick={() => navigate('/signup')}>Create</button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 

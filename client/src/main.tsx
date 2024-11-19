@@ -1,11 +1,11 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import './index.css'
-import SecretView from './routes/secret';
+import ListView from './routes/links.tsx';
+import Redirect from './routes/redirect.tsx';
+import Analytics from './routes/analytics.tsx';
 import Login from './routes/login';
 import Signup from './routes/signup';
 import ForgetPasswordForm from "./routes/forget.tsx";
@@ -21,7 +21,15 @@ AuthService.getInstance().setTokenAndRegion(authToken, region);
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SecretView/>,
+    element: <ListView/>,
+  },
+  {
+    path: "/l/:id",
+    element: <Redirect/>,
+  },
+  {
+    path: "/:id",
+    element: <Analytics/>,
   },
   {
     path: "/login",
@@ -43,7 +51,5 @@ const router = createBrowserRouter([
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-      <RouterProvider router={router}/>
-  </React.StrictMode>,
+  <RouterProvider router={router}/>
 )
