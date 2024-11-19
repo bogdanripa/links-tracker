@@ -5,6 +5,7 @@ import {GenezioError} from "@genezio/types";
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
+  const [recoverLoading, setRecoverLoading] = useState(false);
   const navigate = useNavigate();
 
   const recoverPassword = async (event: React.FormEvent) => {
@@ -13,19 +14,16 @@ export default function ForgotPasswordForm() {
       alert("Please enter your email");
       return;
     }
+    setRecoverLoading(true);
     try {
       await AuthService.getInstance().resetPassword(email);
       alert("Please check your email");
       // Redirect your users to the sign in form
       navigate("/login");
     } catch (error) {
-      alert(
-        "Error code: " +
-        (error as GenezioError).code +
-        ": " +
-        (error as GenezioError).message
-      );
+      alert((error as GenezioError).message);
     }
+    setRecoverLoading(false);
   };
 
   return (
@@ -42,7 +40,9 @@ export default function ForgotPasswordForm() {
           />
         </div>
         <div className="actions">
-          <button type="submit">Recover Password</button>
+          <button type="submit">
+            {recoverLoading ? "Loading..." : "Recover Password"}
+          </button>
         </div>
       </form>
     </div>
