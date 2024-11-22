@@ -12,26 +12,26 @@ const customIcon = new L.Icon({
   popupAnchor: [1, -34],
 });
 
-const locationsCache: { [key: string]: { ip: string; latitude: number; longitude: number; city: string; country: string } } = {};
+const locationsCache: { [key: string]: { ip: string; latitude: number; longitude: number; city: string; country: string, viewerName: string } } = {};
 
 interface IPMapProps {
-  ipAddresses: string[];
+  visits: any[];
 }
 
-const IPMap: React.FC<IPMapProps> = ({ ipAddresses }) => {
-  const [locations, setLocations] = useState<{ ip: string; latitude: number; longitude: number; city: string; country: string }[]>([]);
+const IPMap: React.FC<IPMapProps> = ({ visits }) => {
+  const [locations, setLocations] = useState<{ ip: string; latitude: number; longitude: number; city: string; country: string, viewerName: string }[]>([]);
 
   useEffect(() => {
     const fetchLocations = async () => {
-      const locationPromises = ipAddresses.map(async (ip) => {
-        if (locationsCache[ip]) return locationsCache[ip];
+      const locationPromises = visits.map(async (visit) => {
+        if (locationsCache[visit.ip]) return locationsCache[visit.ip];
         try {
-          const response = await axios.get(`https://freeipapi.com/api/json/${ip}`);
+          const response = await axios.get(`https://freeipapi.com/api/json/${visit.ip}`);
           const { latitude, longitude, cityName: city, countryName: country } = response.data;
-          locationsCache[ip] = { ip, latitude, longitude, city, country };
-          return locationsCache[ip];
+          locationsCache[visit.ip] = { ip: visit.ip, latitude, longitude, city, country, viewerName: visit.viewerName };
+          return locationsCache[visit.ip];
         } catch (error) {
-          console.error(`Failed to fetch location for IP: ${ip}`, error);
+          console.error(`Failed to fetch location for IP: ${visit.ip}`, error);
           return null;
         }
       });
@@ -41,7 +41,7 @@ const IPMap: React.FC<IPMapProps> = ({ ipAddresses }) => {
     };
 
     fetchLocations();
-  }, [ipAddresses]);
+  }, [visits]);
 
   return (
     <MapContainer center={[20, 0]} zoom={2} style={{ height: '300px', width: '100%' }}>
@@ -57,7 +57,7 @@ const IPMap: React.FC<IPMapProps> = ({ ipAddresses }) => {
         >
           <Popup>
             <div>
-              <p>IP: {location.ip}</p>
+              <p>Viewer: {location.viewerName}</p>
               <p>City: {location.city}</p>
               <p>Country: {location.country}</p>
             </div>

@@ -11,7 +11,6 @@ const Analytics: React.FC = () => {
   const [trackedLinks, setTrackedLinks] = useState([]);
   const [visits, setVisits] = useState([]);
   const [allVisits, setAllVisits] = useState([]);
-  const [ipList, setIpList] = useState<string[]>([]);
 
   useEffect(() => {
     // Fetch the link details
@@ -19,18 +18,17 @@ const Analytics: React.FC = () => {
     axios.get(`/links/${id}`).then((response) => {
       setLink(response.data.link.url);
       setTrackedLinks(response.data.trackedLinks);
-    });
-    axios.get(`/links/${id}/visits`).then((response) => {
-      setVisits(response.data);
-      setAllVisits(response.data);
-      setLoading(false);
+      axios.get(`/links/${id}/visits`).then((response) => {
+        for (const visit of response.data) {
+          const trackedLink:any = trackedLinks.find((trackedLink: any) => trackedLink._id === visit.trackedLinkId);
+          visit.viewerName = trackedLink?.viewerName || 'Unknown';
+        }
+        setVisits(response.data);
+        setAllVisits(response.data);
+        setLoading(false);
+      });
     });
   }, []);
-
-  useEffect(() => {
-    const ips = visits.map((visit: any) => visit.ip);
-    setIpList(ips);
-  }, [visits]);
 
   const filterViews = (viewerName: string = '') => {
     if (viewerName)
@@ -74,7 +72,7 @@ const Analytics: React.FC = () => {
             <><a href="#" onClick={() => filterViews(trackedLink.viewerName)}>{trackedLink.viewerName}</a>, </>
           ))}
            <a href="#" onClick={() => filterViews()}>All</a></p>
-        <IPMap ipAddresses={ipList} />
+        <IPMap visits={visits} />
         <table className="data-table">
           <thead>
             <tr>
